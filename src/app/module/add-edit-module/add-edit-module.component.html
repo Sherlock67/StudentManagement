@@ -1,0 +1,14 @@
+<div class="d-flex flex-row bd-highlight  mb-9">
+    <div class="p-2 w-50 bd-highlight">
+  
+        <label class="">ModuleName</label> 
+        <input type="text" class="form-control" [(ngModel)]="module.ModuleName">
+        <label>CreatedBy</label>
+        <input type="text" class="form-control" [(ngModel)]="module.CreatedBy">
+        <label>UpdatedBy</label>
+        <input type="text" class="form-control" [(ngModel)]="module.UpdatedBy">
+    </div>
+  </div>
+  <button (click)="saveModule()" *ngIf="module.ModuleId == 0" class="btn btn-primary">
+    Add
+  </button>
