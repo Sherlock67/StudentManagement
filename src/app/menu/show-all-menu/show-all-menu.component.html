@@ -1,0 +1,62 @@
+<button type="button" class="btn btn-primary m-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  (click)="menuModalOpen()">
+  Add Menu
+</button>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Menu Id</th>
+        <th>Menu Name </th>
+        <th>Created By</th>
+        <th>Updated by</th>
+        <th>Module Name</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataItem of menuList">
+        <td>{{dataItem.MenuId}}</td>
+        <td>{{dataItem.MenuName}}</td>
+        <td>{{dataItem.CreatedBy}}</td>
+        <td>{{dataItem.UpdatedBy}}</td>
+        <td>{{dataItem.ModuleName}}</td>
+        <td>
+          <button type="button" class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+             data-backdrop="static" data-keyboard="false">
+            Edit
+          </button>
+          <button type="button" class="btn btn-light mr-1" >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row"  >
+    <div class="row" *ngIf="menuList.length>0">
+      <div class="col-lg-12">
+          <div class="pull-left ">
+              <span class="well well-sm">Showing  <span class="text-success"><b>{{paging.pageStart }}</b></span> to <span class="text-success"><b>{{paging.pageEnd}}</b></span> of <span class="text-success"><b>{{paging.totalRows}}</b></span> entries</span>
+          </div>
+          <div class="pull-right">
+              <ul *ngIf="paging.pager.pages && paging.pager.pages.length" class="pagination">
+                  <li>
+                      <a class="btn btn-sm btn-outline-secondary" [ngClass]="{disabled:paging.pager.currentPage === 1}" [routerLink]="" (click)="setPaging(1,true)"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Start</a>
+                  </li>
+                  <li>
+                      <a class="btn btn-sm btn-outline-info" [ngClass]="{disabled:paging.pager.currentPage === 1}" [routerLink]="" (click)="setPaging(paging.pager.currentPage - 1,true)"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</a>
+                  </li>
+                  <li *ngFor="let page of paging.pager.pages">
+                      <a class="btn btn-sm btn-outline-secondary" [ngClass]="{active:paging.pager.currentPage === page}" [routerLink]="" (click)="setPaging(page,true)">{{page}}</a>
+                  </li>
+                  <li>
+                      <a class="btn btn-sm btn-outline-info" [ngClass]="{disabled:paging.pager.currentPage === paging.pager.totalPages}" [routerLink]="" (click)="setPaging(paging.pager.currentPage + 1,true)"><i class="fa fa-angle-right" aria-hidden="true"></i>Next</a>
+                  </li>
+                  <li>
+                      <a class="btn btn-sm btn-outline-secondary" [ngClass]="{disabled:paging.pager.currentPage ===paging.pager.totalPages}" [routerLink]="" (click)="setPaging(paging.pager.totalPages,true)"><i class="fa fa-angle-double-right" aria-hidden="true"></i>End</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  </div>

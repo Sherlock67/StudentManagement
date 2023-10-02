@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Pager, Paging,DefaultPageSize } from 'src/app/Common/Pager';
 import { ApiService } from 'src/app/services/api.service';
-import { Module } from '../model/Module';
-import {Pager,Paging,DefaultPageSize} from '../../Common/Pager';
+import { Menu } from '../model/Menu';
+    
+
 @Component({
-  selector: 'app-show-all-module',
-  templateUrl: './show-all-module.component.html',
-  styleUrls: ['./show-all-module.component.css']
+  selector: 'app-show-all-menu',
+  templateUrl: './show-all-menu.component.html',
+  styleUrls: ['./show-all-menu.component.css']
 })
-export class ShowAllModuleComponent implements OnInit {
+export class ShowAllMenuComponent implements OnInit {
   pageSize :number = 5;
   constructor(private service : ApiService){
     this.pageSize = DefaultPageSize;
@@ -25,44 +27,49 @@ export class ShowAllModuleComponent implements OnInit {
     pageSizeList: {}
   };
   
-  module: Module={
-    ModuleId: 0,
-    ModuleName: '',
+  
+  menu: Menu={
+    MenuId: 0,
+    MenuName: '',
     CreatedBy: '',
-    UpdatedBy: ''
+    UpdatedBy: '',
+    ModuleId : 0,
+    ModuleName : ""
   };
-  moduleList: Module[] = [];
-  //ActivateAddEditDepartComp :boolean = false;
+  menuList: Menu[] = [];
+
   ngOnInit(): void {
-    this.refreshModuleList({},1,this.pageSize,true);
+    this.refreshMenuList({},1,this.pageSize,true);
   }
-  addModuleModal() {
-    this.module = {
-      ModuleId :0,
-      ModuleName : "",
-      CreatedBy : "",
-      UpdatedBy : ""
+
+  menuModalOpen() {
+    this.menu = {
+      MenuId: 0,
+      MenuName: '',
+      CreatedBy: '',
+      UpdatedBy: '',
+      ModuleId : 0,
+      ModuleName : ""
+
     }
-    //this.ActivateAddEditDepartComp = true;
   }
   setPaging(pageNumber: number,   isPaging: boolean) {
     if (isPaging) {
-        this.refreshModuleList({}, pageNumber, this.paging.pageSize, false);
+        this.refreshMenuList({},pageNumber, this.paging.pageSize, false);
     }
     else {
         this.paging.pager = Pager.getPager(this.paging.totalRows, pageNumber, this.paging.pageSize);
-        this.paging.pagedItems = this.moduleList;
+        this.paging.pagedItems = this.menuList;
     }
   }
-  refreshModuleList(searchParams: any = {}, pageNumber:number, pageSize:number,isPaging:boolean) {
+  refreshMenuList(searchParams: any = {}, pageNumber:number, pageSize:number,isPaging:boolean){
     let params = {
       pageNumber :pageNumber ,
       pageSize : pageSize
-
     }
-    this.service.getModuleList(params).subscribe(data => {      
+    this.service.getMenuList(params).subscribe(data => {      
       if(data){
-        this.moduleList = data;
+        this.menuList = data;
         this.paging.pageNumber= pageNumber;
         this.paging.pageSize = pageSize,
         this.paging.totalRows = 0,
@@ -75,7 +82,7 @@ export class ShowAllModuleComponent implements OnInit {
         this.paging.pageSizeList= Pager.pageSize()
       
 
-      this.paging.totalRows = data.length > 0 ? data[0].total : 0;
+     this.paging.totalRows = data.length > 0 ? data[0].total : 0;
       //paging info start   
       this.paging.totalRowsInList = data.length;
       if (this.paging.pageNumber == 0 || this.paging.pageNumber == 1) {
@@ -93,7 +100,7 @@ export class ShowAllModuleComponent implements OnInit {
       if (this.paging.isPaging)
           this.setPaging( pageNumber, !this.paging.isPaging);
       else {
-          this.paging.pager = Pager.getPager(this.paging.totalRows, this.paging.pageNumber, this.paging.pageSize);
+          this.paging.pager = Pager.getPager(this.paging.totalRows,this. paging.pageNumber, this.paging.pageSize);
           this.paging.pagedItems = data;
       }
       }

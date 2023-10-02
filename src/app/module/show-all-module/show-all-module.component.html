@@ -51,32 +51,31 @@
 </table>
 
 
-<div class="row" *ngIf="paging;">
-
-  <div class="col-lg-12 col-md-12 col-sm-12 p-0 d-flex justify-content-end pe-3" *ngIf="paging.pageSize<paging.totalRows">
-
-      <div class="float-start ms-4" *ngIf="paging.pagedItems as courseList;">
-          <ul *ngIf="paging.pager.pages && paging.pager.pages.length" class="pagination">
-
-              <li>
-                  <a href="javascript:void(0);" class="btn btn-sm btn-outline-info ms-1"
-                      [ngClass]="{disabled:paging.pager.currentPage === 1}"
-                      (click)="setPaging(paging,courseList,paging.pager.currentPage - 1,true)"><i
-                          class="fa fa-angle-left" aria-hidden="true"></i>Prev</a>
-              </li>
-              <li *ngFor="let page of paging.pager.pages">
-                  <a href="javascript:void(0);" class="btn btn-sm btn-outline-secondary ms-1"
-                      [ngClass]="{active:paging.pager.currentPage === page}"
-                      (click)="setPaging(paging,courseList,page,true)">{{page}}</a>
-              </li>
-              <li>
-                  <a href="javascript:void(0);" class="btn btn-sm btn-outline-info ms-1"
-                      [ngClass]="{disabled:paging.pager.currentPage === paging.pager.totalPages}"
-                      (click)="setPaging(paging,courseList,paging.pager.currentPage + 1,true)"><i
-                          class="fa fa-angle-right" aria-hidden="true"></i>Next</a>
-              </li>
-
-          </ul>
-      </div>
-  </div>
+<div class="row"  >
+  <div class="row" *ngIf="moduleList.length>0">
+    <div class="col-lg-12">
+        <div class="pull-left ">
+            <span class="well well-sm">Showing  <span class="text-success"><b>{{paging.pageStart }}</b></span> to <span class="text-success"><b>{{paging.pageEnd}}</b></span> of <span class="text-success"><b>{{paging.totalRows}}</b></span> entries</span>
+        </div>
+        <div class="pull-right">
+            <ul *ngIf="paging.pager.pages && paging.pager.pages.length" class="pagination">
+                <li>
+                    <a class="btn btn-sm btn-outline-secondary" [ngClass]="{disabled:paging.pager.currentPage === 1}" [routerLink]="" (click)="setPaging(1,true)"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Start</a>
+                </li>
+                <li>
+                    <a class="btn btn-sm btn-outline-info" [ngClass]="{disabled:paging.pager.currentPage === 1}" [routerLink]="" (click)="setPaging(paging.pager.currentPage - 1,true)"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</a>
+                </li>
+                <li *ngFor="let page of paging.pager.pages">
+                    <a class="btn btn-sm btn-outline-secondary" [ngClass]="{active:paging.pager.currentPage === page}" [routerLink]="" (click)="setPaging(page,true)">{{page}}</a>
+                </li>
+                <li>
+                    <a class="btn btn-sm btn-outline-info" [ngClass]="{disabled:paging.pager.currentPage === paging.pager.totalPages}" [routerLink]="" (click)="setPaging(paging.pager.currentPage + 1,true)"><i class="fa fa-angle-right" aria-hidden="true"></i>Next</a>
+                </li>
+                <li>
+                    <a class="btn btn-sm btn-outline-secondary" [ngClass]="{disabled:paging.pager.currentPage ===paging.pager.totalPages}" [routerLink]="" (click)="setPaging(paging.pager.totalPages,true)"><i class="fa fa-angle-double-right" aria-hidden="true"></i>End</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 </div>
