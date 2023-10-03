@@ -1,1 +1,13 @@
-<p>add-edit-role works!</p>
+
+
+
+  <form [formGroup]="registrationForm" class="form-control"(ngSubmit)="createNewRole()">
+    <div class="form-group">
+      <label>RoleName</label>
+      <input type="text" formControlName="RoleName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Add Role</button>
+        <button class="btn btn-light" type="submit">Reset</button>
+    </div>
+  </form>

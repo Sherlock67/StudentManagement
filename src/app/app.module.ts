@@ -7,7 +7,7 @@ import { AddEditModuleComponent } from './module/add-edit-module/add-edit-module
 import { ShowAllModuleComponent } from './module/show-all-module/show-all-module.component';
 import { ApiService } from './services/api.service';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from './menu/menu.component';
 import { ShowAllMenuComponent } from './menu/show-all-menu/show-all-menu.component';
 import { AddEditMenuComponent } from './menu/add-edit-menu/add-edit-menu.component';
@@ -18,6 +18,7 @@ import { RoleComponent } from './role/role.component';
 
 import { RoleListComponent } from './role/components/role-list/role-list/role-list.component';
 import { AddEditRoleComponent } from './role/components/add-edit-role/add-edit-role/add-edit-role.component';
+import { RoleService } from './role/services/role.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,9 +39,10 @@ import { AddEditRoleComponent } from './role/components/add-edit-role/add-edit-r
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [ApiService],
+  providers: [ApiService,RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

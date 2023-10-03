@@ -10,7 +10,7 @@ export class RoleService {
   private readonly apiUrl = 'https://localhost:44308';
   constructor(private http: HttpClient) { }
 
-  addRole(role: Role): Observable<any> {
+addRole(role: Role): Observable<any> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'text/plain' }) };
     return this.http.post(this.apiUrl + '/Role/AddOrEditRole', role,httpOptions).
     pipe(map(res => res))

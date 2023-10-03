@@ -29,7 +29,8 @@ export class RoleListComponent implements OnInit {
     pageSizeList: {}
   };
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+    this.refreshRoleList({},1,this.pageSize,true);
+    
    }
    roles: Role={
     RoleId : 0,
