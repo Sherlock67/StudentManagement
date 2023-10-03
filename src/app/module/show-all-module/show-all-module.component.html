@@ -38,12 +38,12 @@
       <td>{{dataItem.CreatedBy}}</td>
       <td>{{dataItem.UpdatedBy}}</td>
       <td>
-        <button type="button" class="btn btn-light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <button type="button" class="btn btn-light mr-1" (click)="editClick(dataItem)" data-bs-toggle="modal" data-bs-target="#exampleModal"
            data-backdrop="static" data-keyboard="false">
-          
+          Edit 
         </button>
-        <button type="button" class="btn btn-light mr-1" >
-          
+        <button type="button"  (click)="deleteClick(dataItem)"  class="btn btn-light mr-1" >
+          Delete
         </button>
       </td>
     </tr>

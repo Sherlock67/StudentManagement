@@ -53,6 +53,16 @@ export class ShowAllMenuComponent implements OnInit {
 
     }
   }
+
+  deleteClick(item: any) {
+    if (confirm('Are you sure??')) {
+      this.service.deleteMenu(item.MenuId).subscribe(data => {
+        alert(data.toString());
+        //this.refreshEmpList();
+        this.refreshMenuList({},1,this.pageSize,true);
+      })
+    }
+  }
   setPaging(pageNumber: number,   isPaging: boolean) {
     if (isPaging) {
         this.refreshMenuList({},pageNumber, this.paging.pageSize, false);

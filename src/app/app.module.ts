@@ -11,6 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './menu/menu.component';
 import { ShowAllMenuComponent } from './menu/show-all-menu/show-all-menu.component';
 import { AddEditMenuComponent } from './menu/add-edit-menu/add-edit-menu.component';
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegistrationComponent } from './auth/registration/registration.component';
+import { RoleComponent } from './role/role.component';
+
+import { RoleListComponent } from './role/components/role-list/role-list/role-list.component';
+import { AddEditRoleComponent } from './role/components/add-edit-role/add-edit-role/add-edit-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +27,12 @@ import { AddEditMenuComponent } from './menu/add-edit-menu/add-edit-menu.compone
     MenuComponent,
     ShowAllMenuComponent,
     AddEditMenuComponent,
-    
+    AuthComponent,
+    LoginComponent,
+    RegistrationComponent,
+    RoleComponent,
+    RoleListComponent,
+    AddEditRoleComponent
   ],
   imports: [
     BrowserModule,

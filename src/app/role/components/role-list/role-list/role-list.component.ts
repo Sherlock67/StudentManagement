@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
-import { Module } from '../model/Module';
-import {Pager,Paging,DefaultPageSize} from '../../Common/Pager';
+import { DefaultPageSize, Pager, Paging } from 'src/app/Common/Pager';
+import { Role } from 'src/app/role/models/role';
+import { RoleService } from 'src/app/role/services/role.service';
+
 @Component({
-  selector: 'app-show-all-module',
-  templateUrl: './show-all-module.component.html',
-  styleUrls: ['./show-all-module.component.css']
+  selector: 'app-role-list',
+  templateUrl: './role-list.component.html',
+  styleUrls: ['./role-list.component.css']
 })
-export class ShowAllModuleComponent implements OnInit {
+export class RoleListComponent implements OnInit {
   pageSize :number = 5;
-  constructor(private service : ApiService){
+  constructor (private roleService : RoleService){
     this.pageSize = DefaultPageSize;
   }
-  m : any;
+  role:any;
+  roleList: Role[] = [];
+
   paging : Paging ={
     pageNumber: 0,
     pageSize: 0,
@@ -25,58 +28,39 @@ export class ShowAllModuleComponent implements OnInit {
     isPaging: false,
     pageSizeList: {}
   };
-  
-  module: Module={
-    ModuleId: 0,
-    ModuleName: '',
-    CreatedBy: '',
-    UpdatedBy: ''
-  };
-  moduleList: Module[] = [];
-  //ActivateAddEditDepartComp :boolean = false;
   ngOnInit(): void {
-    this.refreshModuleList({},1,this.pageSize,true);
-  }
-  addModuleModal() {
-    this.module = {
-      ModuleId :0,
-      ModuleName : "",
-      CreatedBy : "",
-      UpdatedBy : ""
+    // throw new Error('Method not implemented.');
+   }
+   roles: Role={
+    RoleId : 0,
+    RoleName : ""
+  };
+
+  addRoleModal() {
+    this.roles = {
+     RoleId : 0,
+     RoleName : ""
     }
     //this.ActivateAddEditDepartComp = true;
   }
-  editClick(item: any) {
-    this.m = item;
-  }
-
-  deleteClick(item: any) {
-    if (confirm('Are you sure??')) {
-      this.service.deleteModule(item.ModuleId).subscribe(data => {
-        alert(data.toString());
-        //this.refreshEmpList();
-        this.refreshModuleList({},1,this.pageSize,true);
-      })
-    }
-  }
   setPaging(pageNumber: number,   isPaging: boolean) {
     if (isPaging) {
-        this.refreshModuleList({}, pageNumber, this.paging.pageSize, false);
+        this.refreshRoleList({}, pageNumber, this.paging.pageSize, false);
     }
     else {
         this.paging.pager = Pager.getPager(this.paging.totalRows, pageNumber, this.paging.pageSize);
-        this.paging.pagedItems = this.moduleList;
+        this.paging.pagedItems = this.roleList;
     }
   }
-  refreshModuleList(searchParams: any = {}, pageNumber:number, pageSize:number,isPaging:boolean) {
+  refreshRoleList(searchParams: any = {}, pageNumber:number, pageSize:number,isPaging:boolean) {
     let params = {
       pageNumber :pageNumber ,
       pageSize : pageSize
 
     }
-    this.service.getModuleList(params).subscribe(data => {      
+    this.roleService.getRoleList(params).subscribe(data => {      
       if(data){
-        this.moduleList = data;
+        this.roleList = data;
         this.paging.pageNumber= pageNumber;
         this.paging.pageSize = pageSize,
         this.paging.totalRows = 0,
@@ -113,5 +97,4 @@ export class ShowAllModuleComponent implements OnInit {
       }
     });
   }
-
 }

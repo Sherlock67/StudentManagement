@@ -21,18 +21,25 @@ export class ApiService {
   getModuleList(params:any): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + '/Module/AllModules?pageNumber='+params.pageNumber+'&pageSize='+params.pageSize);
   }
-
-  
   addMenu(menu:Menu) : Observable<any> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'text/plain' }) };
     return this.http.post(this.apiUrl + '/Menu/AddOrEditMenu', menu,httpOptions).
     pipe(map(res => res))
    .pipe(catchError(x=>x));
   }
-
-
   getMenuList(params:any):Observable<any[]>{
-    
     return this.http.get<any[]>(this.apiUrl + '/Menu/GetAllMenus?pageNumber='+params.pageNumber+'&pageSize='+params.pageSize);
+  }
+  deleteModule(moduleId: number): Observable<number> {
+    //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'text/plain' }) };
+    return this.http.get<number>(this.apiUrl + '/Module/DeleteModule?ModuleId='+moduleId );
+  }
+  deleteMenu(menuId: number): Observable<number> {
+    //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.get<number>(this.apiUrl + '/Menu/DeleteMenu?MenuId=' + menuId );
+  }
+  updateModule(module: any): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'text/plain' }) };
+    return this.http.put<any>(this.apiUrl + '/Module/AddOrEditModule/', module, httpOptions);
   }
 }
